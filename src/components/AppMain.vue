@@ -2,18 +2,18 @@
   <main>
     <h2>AppMain</h2>
     <!-- Input e button per la ricerca da spostare poi nell Header -->
-    <label>Ricerca qui il tuuo film: </label>
-    <input type="text" @keyup.enter="getFilms" v-model="inputText" id="search">
-    <button @click="getFilms">Search</button>
+    <label>Ricerca qui il tuo film: </label>
+    <input type="text" @keyup.enter="getMovies" v-model="inputText" id="search">
+    <button @click="getMovies">Search</button>
 
     <div v-if="loading">Nessun Films ancora caricato...</div>
     <div v-else id="films">
         <!-- Card Film -->
-        <div v-for="film in films" :key="film.id" class="film-card">
-            <h3> {{film.title}} </h3>
-            <h4> {{film.original_title}} </h4>
-            <span><strong>Lingua: </strong> {{film.original_language}}</span>
-            <span><strong> Voto: </strong> {{film.vote_average}}</span>
+        <div v-for="movie in moviesResults" :key="movie.id" class="film-card">
+            <h3> {{movie.title}} </h3>
+            <h4> {{movie.original_title}} </h4>
+            <span><strong>Lingua: </strong> {{movie.original_language}}</span>
+            <span><strong> Voto: </strong> {{movie.vote_average}}</span>
         </div>
     </div>
   </main>
@@ -31,19 +31,20 @@ export default {
       return {
           apiKey: 'd1f8770b72ea44dd001003d5c3b3b323',
           apiUrl: 'https://api.themoviedb.org/3/search/',
-          films: [],
+          movies: [],
           loading: true,
           inputText: '',
           searchText: '',
 
       }
   },
-  created() {
-  },
   computed: {
+      moviesResults(){
+          return [...this.movies]
+      }
   },
   methods: {
-      getFilms(){
+      getMovies(){
           this.searchText = this.inputText.toLowerCase();
           axios
           .get(this.apiUrl + 'movie',{
@@ -54,7 +55,7 @@ export default {
               }
           })
           .then((res) => {
-              this.films = res.data.results;
+              this.movies = res.data.results;
               this.loading = false;
           })
           .catch((err) => {
