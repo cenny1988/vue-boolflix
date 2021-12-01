@@ -1,10 +1,19 @@
 <template>
   <main>
     <h2>AppMain</h2>
+    <!-- Input e button per la ricerca da spostare poi nell Header -->
+    <label>Ricerca qui il tuuo film: </label>
+    <input type="text" @keyup.enter="getFilms" v-model="inputText" id="search">
+    <button @click="getFilms">Search</button>
+
     <div v-if="loading">Nessun Films ancora caricato...</div>
     <div v-else id="films">
-        <div v-for="film, index in films" :key="index" class="film-card">
+        <!-- Card Film -->
+        <div v-for="film in films" :key="film.id" class="film-card">
             <h3> {{film.title}} </h3>
+            <h4> {{film.original_title}} </h4>
+            <span><strong>Lingua: </strong> {{film.original_language}}</span>
+            <span><strong> Voto: </strong> {{film.vote_average}}</span>
         </div>
     </div>
   </main>
@@ -20,26 +29,37 @@ export default {
   },
   data() {
       return {
-          apiUrl: "https://api.themoviedb.org/3/search/movie?api_key=d1f8770b72ea44dd001003d5c3b3b323&query=ritorno+al+futuro",
+          apiKey: 'd1f8770b72ea44dd001003d5c3b3b323',
+          apiUrl: 'https://api.themoviedb.org/3/search/',
           films: [],
           loading: true,
+          inputText: '',
+          searchText: '',
 
       }
   },
   created() {
-      this.getFilms();
+  },
+  computed: {
   },
   methods: {
       getFilms(){
+          this.searchText = this.inputText.toLowerCase();
           axios
-          .get(this.apiUrl)
+          .get(this.apiUrl + 'movie',{
+              params: {
+                  api_key: this.apiKey,
+                  query: this.searchText,
+                  language: 'it-IT'
+              }
+          })
           .then((res) => {
               this.films = res.data.results;
               this.loading = false;
           })
           .catch((err) => {
               console.log("Errore: ", err);
-          }); 
+          });
       },
 
   },
