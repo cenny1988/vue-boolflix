@@ -1,9 +1,13 @@
 <template>
   <section>
       <div class="film-card">
+            <img v-if="detailsSerie.poster_path !== null" :src="imageUrl + posterSize + detailsSerie.poster_path" :alt="detailsSerie.name">
+            <img v-else src="../assets/img/img-not-found.png" :alt="detailsSerie.name">
             <h3> {{detailsSerie.name}} </h3>
             <h4> {{detailsSerie.original_name}} </h4>
             <country-flag v-if="detailsSerie.original_language === 'en' " :country="'gb-eng'" size='normal'/>
+            <country-flag v-else-if="detailsSerie.original_language === 'zh' || detailsSerie.original_language === 'hi' " :country="'cn'" size='normal'/>
+            <country-flag v-else-if="detailsSerie.original_language === 'ja' " :country="'jp'" size='normal'/>
             <country-flag v-else :country="detailsSerie.original_language" size='normal'/>
             <!-- {{detailsSerie.original_language}} -->
             <!-- <span><strong>Lingua: </strong> {{detailsSerie.original_language}}</span> -->
@@ -23,13 +27,13 @@ export default {
   props: {
     detailsSerie: Object,
   },
+  data() {
+      return {
+          imageUrl: 'https://image.tmdb.org/t/p/',
+          posterSize: 'w342',
+      }
+  },
   computed:{
-    //   flags(){
-    //     //   if (this.detailsSerie.original_language === 'en' ){
-    //     //       return this.detailsSerie.original_language = 'gb-eng';
-    //     //   }
-    //       return this.detailsSerie.original_language === 'en' ? this.detailsSerie.original_language = 'gb-eng' : this.detailsSerie.original_language
-    //   }
   },
 }
 </script>

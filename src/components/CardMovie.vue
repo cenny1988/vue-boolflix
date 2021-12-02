@@ -1,6 +1,8 @@
 <template>
   <section>
       <div class="film-card">
+            <img v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
+            <img v-else src="../assets/img/img-not-found.png" :alt="detailsMovie.name">
             <h3> {{detailsMovie.title}} </h3>
             <h4> {{detailsMovie.original_title}} </h4>
             <country-flag v-if="detailsMovie.original_language === 'en' " :country="'gb-eng'" size='normal'/>
@@ -24,6 +26,12 @@ export default {
   },
   props: {
     detailsMovie: Object,
+  },
+  data() {
+      return {
+          imageUrl: 'https://image.tmdb.org/t/p/',
+          posterSize: 'w342',
+      }
   },
   computed: {
     // potrei prendere detailsMovie.original_language e verificare qui l esistenza della flag...

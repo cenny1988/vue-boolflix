@@ -4,10 +4,13 @@
     <div v-if="loadOff">Nessun Films ancora caricato...</div>
     <div v-else id="lists">
         <h3>Lista Film</h3>
-        <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
-        <br>
+        <div class="lists">
+            <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
+        </div>
         <h3>Lista Serie</h3>
-        <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="film-card"/>
+        <div class="lists">
+            <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="film-card"/>
+        </div>
     </div>
   </main>
 </template>
@@ -44,5 +47,15 @@ main{
     min-height: calc(100vh - 100px);
     background-color: #999;
 
+    .lists{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+
+        .film-card{
+            padding: .3rem;
+            border: 1px solid #000;
+        }
+    }
 }
 </style>
