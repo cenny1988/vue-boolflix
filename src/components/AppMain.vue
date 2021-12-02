@@ -4,28 +4,24 @@
     <div v-if="loadOff">Nessun Films ancora caricato...</div>
     <div v-else id="films">
         <h3>Lista Film</h3>
-        <div v-for="movie in moviesList" :key="movie.id" class="film-card">
-            <h3> {{movie.title}} </h3>
-            <h4> {{movie.original_title}} </h4>
-            <span><strong>Lingua: </strong> {{movie.original_language}}</span>
-            <span><strong> Voto: </strong> {{movie.vote_average}}</span>
-        </div>
+        <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
         <br>
         <h3>Lista Serie</h3>
-        <div v-for="serie in seriesList" :key="serie.id" class="film-card">
-            <h3> {{serie.name}} </h3>
-            <h4> {{serie.original_name}} </h4>
-            <span><strong>Lingua: </strong> {{serie.original_language}}</span>
-            <span><strong> Voto: </strong> {{serie.vote_average}}</span>
-        </div>
+        <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="film-card"/>
     </div>
   </main>
 </template>
 
 <script>
+import CardMovie from '@/components/CardMovie.vue';
+import CardSerie from '@/components/CardSerie.vue';
 
 export default {
   name: 'AppMain',
+  components: {
+      CardMovie,
+      CardSerie,
+  },
   props: {
       moviesList: Array,
       seriesList: Array,
