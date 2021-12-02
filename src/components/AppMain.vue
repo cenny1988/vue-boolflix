@@ -2,7 +2,7 @@
   <main>
     <h2>AppMain</h2>
     <div v-if="loadOff">Nessun Films ancora caricato...</div>
-    <div v-else id="films">
+    <div v-else id="lists">
         <h3>Lista Film</h3>
         <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
         <br>
