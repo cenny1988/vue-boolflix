@@ -24,7 +24,7 @@ export default {
   methods: {
       getSearch(){
           this.searchText = this.inputText.toLowerCase();
-          this.inputText = '';
+        //   this.inputText = '';
           this.$emit('searchUser', this.searchText);
       },
   },

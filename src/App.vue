@@ -1,17 +1,10 @@
 <template>
   <div id="app">
-    <AppHeader @searchUser="getMovies"/>
-    <!-- <div v-if="loading">Nessun Films ancora caricato...</div>
-    <div v-else id="films">
-        <div v-for="movie in moviesResults" :key="movie.id" class="film-card">
-            <h3> {{movie.title}} </h3>
-            <h4> {{movie.original_title}} </h4>
-            <span><strong>Lingua: </strong> {{movie.original_language}}</span>
-            <span><strong> Voto: </strong> {{movie.vote_average}}</span>
-        </div>
-    </div> -->
+    <AppHeader @searchUser="research"/>
+    
     <AppMain
       :moviesList="movies"
+      :seriesList="series"
       :loadingStop="loading"
     />
   </div>
@@ -33,33 +26,60 @@ export default {
       apiKey: 'd1f8770b72ea44dd001003d5c3b3b323',
       apiUrl: 'https://api.themoviedb.org/3/search/',
       movies: [],
+      series: [],
+      all: [],
       loading: true,
     }
   },
   computed: {
       moviesResults(){
-          // this.getMovies();
-          return [...this.movies]
-      }
+          return [...this.movies];
+      },
+      seriesResults(){
+          return [...this.series];
+      },
   },  
   methods: {
-    getMovies(valueSearch){
+    getMovies(value, type){
           axios
-          .get(this.apiUrl + 'movie',{
+          .get(this.apiUrl + type,{
               params: {
                   api_key: this.apiKey,
-                  query: valueSearch,
-                  language: 'it-IT'
+                  query: value,
+                  language: 'it'
               }
           })
           .then((res) => {
               this.movies = res.data.results;
-              this.loading = false;
           })
           .catch((err) => {
               console.log("Errore: ", err);
           });
+          console.log(this.movies);
       },
+    getSeries(value, type){
+          axios
+          .get(this.apiUrl + type,{
+              params: {
+                  api_key: this.apiKey,
+                  query: value,
+                  language: 'it'
+              }
+          })
+          .then((res) => {
+              this.series = res.data.results;
+          })
+          .catch((err) => {
+              console.log("Errore: ", err);
+          });
+          console.log(this.series);
+      },
+    research(valueSearch){
+          this.getMovies(valueSearch, 'movie');
+          this.getSeries(valueSearch, 'tv');
+          this.loading = false;
+          
+    },
   },
 }
 </script>
