@@ -13,12 +13,17 @@
            
             <!-- <span><strong> Voto: </strong> {{detailsSerie.vote_average}}</span> -->
             <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
+            <font-awesome-icon icon="star" />
       </div>
   </section>
 </template>
 
 <script>
 import CountryFlag from 'vue-country-flag';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faStar)
 
 export default {
   name: 'CardSerie',
