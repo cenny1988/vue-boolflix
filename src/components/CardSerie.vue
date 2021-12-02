@@ -10,8 +10,9 @@
             <country-flag v-else-if="detailsSerie.original_language === 'ja' " :country="'jp'" size='normal'/>
             <country-flag v-else :country="detailsSerie.original_language" size='normal'/>
             <!-- {{detailsSerie.original_language}} -->
-            <!-- <span><strong>Lingua: </strong> {{detailsSerie.original_language}}</span> -->
-            <span><strong> Voto: </strong> {{detailsSerie.vote_average}}</span>
+           
+            <!-- <span><strong> Voto: </strong> {{detailsSerie.vote_average}}</span> -->
+            <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
       </div>
   </section>
 </template>
@@ -31,9 +32,17 @@ export default {
       return {
           imageUrl: 'https://image.tmdb.org/t/p/',
           posterSize: 'w342',
+          vote: null,
       }
   },
   computed:{
+      },
+  methods: {
+      setVote(card){
+        this.vote = card.vote_average;
+        console.log(this.vote);
+        return(this.vote);
+    },
   },
 }
 </script>

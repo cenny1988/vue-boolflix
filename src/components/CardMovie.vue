@@ -5,12 +5,13 @@
             <img v-else src="../assets/img/img-not-found.png" :alt="detailsMovie.name">
             <h3> {{detailsMovie.title}} </h3>
             <h4> {{detailsMovie.original_title}} </h4>
+            <!-- serie di v-if per controllo flags -->
             <country-flag v-if="detailsMovie.original_language === 'en' " :country="'gb-eng'" size='normal'/>
             <country-flag v-else-if="detailsMovie.original_language === 'zh' || detailsMovie.original_language === 'hi' " :country="'cn'" size='normal'/>
             <country-flag v-else-if="detailsMovie.original_language === 'ja' " :country="'jp'" size='normal'/>
             <country-flag v-else :country="detailsMovie.original_language" size='normal'/>
-            {{detailsMovie.original_language}}
-            <!-- <span><strong>Lingua: </strong> {{detailsMovie.original_language}}</span> -->
+            <!-- {{detailsMovie.original_language}} -->
+
             <span><strong> Voto: </strong> {{detailsMovie.vote_average}}</span>
       </div>
   </section>
@@ -35,6 +36,9 @@ export default {
   },
   computed: {
     // potrei prendere detailsMovie.original_language e verificare qui l esistenza della flag...
+  },
+  methods: {
+    
   },
 }
 </script>
