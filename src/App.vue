@@ -55,7 +55,7 @@ export default {
           .catch((err) => {
               console.log("Errore: ", err);
           });
-          console.log(this.movies);
+          // console.log(this.movies);
       },
     getSeries(value, type){
           axios
@@ -72,7 +72,7 @@ export default {
           .catch((err) => {
               console.log("Errore: ", err);
           });
-          console.log(this.series);
+          // console.log(this.series);
       },
     research(valueSearch){
           this.getMovies(valueSearch, 'movie');
