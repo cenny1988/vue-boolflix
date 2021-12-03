@@ -5,17 +5,19 @@
             <img v-if="detailsSerie.poster_path !== null" :src="imageUrl + posterSize + detailsSerie.poster_path" :alt="detailsSerie.name">
             <img v-else src="../assets/img/img-not-found.png" :alt="detailsSerie.name">
 
-            <!-- titolo -->
-            <h3> {{detailsSerie.name}} </h3>
-            <!-- titolo originale -->
-            <h4> {{detailsSerie.original_name}} </h4>
+            <div class="detail-card">
+                <!-- titolo -->
+                <h3> {{detailsSerie.name}} </h3>
+                <!-- titolo originale -->
+                <h4> {{detailsSerie.original_name}} </h4>
 
-            <!-- set flags -->
-            <country-flag :country="setFlag(detailsSerie)" size='normal'/>
-           
-            <!-- voto con star -->
-            <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
-            <span><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
+                <div>
+                    <span><country-flag :country="setFlag(detailsSerie)" size='normal'/></span>
+                    <!-- voto con star -->
+                    <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
+                    <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
+                </div>
+            </div>
       </div>
   </section>
 </template>
@@ -68,5 +70,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    
+.star{
+  color: gold;
+}    
 </style>

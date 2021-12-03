@@ -5,17 +5,19 @@
         <img v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
         <img v-else src="../assets/img/img-not-found.png" :alt="detailsMovie.name">
 
-        <!-- titolo -->
-        <h3> {{detailsMovie.title}} </h3>
-        <!-- titolo originale -->
-        <h4> {{detailsMovie.original_title}} </h4>
+        <div class="detail-card">
+          <!-- titolo -->
+          <h3>Titolo: {{detailsMovie.title}} </h3>
+          <!-- titolo originale -->
+          <h4>Titolo Originale: {{detailsMovie.original_title}} </h4>
 
-        <!-- serie di v-if per controllo flags -->
-        <country-flag :country="setFlag(detailsMovie)" size='normal'/>
-
-        <!-- voto con star -->
-        <span><strong> Voto: </strong> {{setVote(detailsMovie)}}</span>
-        <span><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
+          <div>
+            <span><country-flag :country="setFlag(detailsMovie)" size='normal'/></span>
+            <!-- voto con star -->
+            <span><strong> Voto: </strong> {{setVote(detailsMovie)}}</span>
+            <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
+          </div>
+        </div>
 
       </div>
   </section>
@@ -69,5 +71,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.star{
+  color: gold;
+}
 
 </style>

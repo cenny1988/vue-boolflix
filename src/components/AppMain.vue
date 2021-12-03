@@ -1,17 +1,18 @@
 <template>
   <main>
-    <h2>AppMain</h2>
+    
     <div v-if="loadOff">Nessun Films ancora caricato...</div>
-    <div v-else id="lists">
-        <h3>Lista Film</h3>
+    <div v-else id="list-card">
+        <!-- <h3>Lista Film</h3> -->
         <div class="lists">
             <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
         </div>
-        <h3>Lista Serie</h3>
+        <!-- <h3>Lista Serie</h3> -->
         <div class="lists">
             <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="film-card"/>
         </div>
     </div>
+
   </main>
 </template>
 
@@ -42,19 +43,55 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 main{
     min-height: calc(100vh - 100px);
-    background-color: #999;
+    background-color: #434343;
+    
 
     .lists{
         display: flex;
         flex-wrap: wrap;
-        margin: 1rem 0;
+        
 
         .film-card{
-            padding: .3rem;
-            border: 1px solid #000;
+            flex-basis: calc(100% / 5);
+            margin-bottom: .5rem;
+            cursor: pointer;
+            position: relative;
+
+            &:hover{
+                .detail-card{
+                    display: block;
+                }
+            }
+
+            img{
+            width: 100%;
+            min-height: 570px;
+            }
+
+            .detail-card{
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #434343;
+                padding: 2rem .4rem;
+
+                h3, h4, div{
+                    margin-bottom: .7rem;
+                }
+                div{
+                    span{
+                        margin-right: 10px;
+                    }
+                }
+                
+            }
+
         }
     }
 }
