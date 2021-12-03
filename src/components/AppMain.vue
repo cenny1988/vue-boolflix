@@ -55,10 +55,12 @@ main{
         
 
         .film-card{
-            flex-basis: calc(100% / 5);
-            margin-bottom: .5rem;
+            flex-basis: calc(100% / 5 - 2px);
+            margin: 0 1px .5rem;
             cursor: pointer;
             position: relative;
+            height: 570px;
+            
 
             &:hover{
                 .detail-card{
@@ -67,8 +69,11 @@ main{
             }
 
             img{
-            width: 100%;
-            min-height: 570px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                // border-radius: 20px;
+            
             }
 
             .detail-card{
@@ -83,6 +88,12 @@ main{
 
                 h3, h4, div{
                     margin-bottom: .7rem;
+                }
+                h3{
+                    font-size: 2rem;
+                }
+                .vote{
+                    text-align: center;
                 }
                 div{
                     span{

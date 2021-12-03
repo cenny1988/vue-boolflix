@@ -55,7 +55,7 @@ header{
     padding: 0 2rem;
 
     div:first-child{
-        color: red;
+        color: #e50914;
         font-size: 2rem;
         font-weight: 900;
         letter-spacing: .1rem;
