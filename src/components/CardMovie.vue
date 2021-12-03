@@ -1,19 +1,21 @@
 <template>
   <section>
       <div class="film-card">
-            <img v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
-            <img v-else src="../assets/img/img-not-found.png" :alt="detailsMovie.name">
-            <h3> {{detailsMovie.title}} </h3>
-            <h4> {{detailsMovie.original_title}} </h4>
-            <!-- serie di v-if per controllo flags -->
-            <country-flag v-if="detailsMovie.original_language === 'en' " :country="'gb-eng'" size='normal'/>
-            <country-flag v-else-if="detailsMovie.original_language === 'zh' || detailsMovie.original_language === 'hi' " :country="'cn'" size='normal'/>
-            <country-flag v-else-if="detailsMovie.original_language === 'ja' " :country="'jp'" size='normal'/>
-            <country-flag v-else :country="detailsMovie.original_language" size='normal'/>
-            <!-- {{detailsMovie.original_language}} -->
+        <!-- img card -->
+        <img v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
+        <img v-else src="../assets/img/img-not-found.png" :alt="detailsMovie.name">
 
-            <span><strong> Voto: </strong> {{detailsMovie.vote_average}}</span>
-            <font-awesome-icon icon="star" />
+        <!-- titolo -->
+        <h3> {{detailsMovie.title}} </h3>
+        <!-- titolo originale -->
+        <h4> {{detailsMovie.original_title}} </h4>
+
+        <!-- serie di v-if per controllo flags -->
+        <country-flag :country="setFlag(detailsMovie)" size='normal'/>
+
+        <!-- voto con star -->
+        <span><strong> Voto: </strong> {{setVote(detailsMovie)}}</span>
+        <span><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
 
       </div>
   </section>
@@ -38,13 +40,29 @@ export default {
       return {
           imageUrl: 'https://image.tmdb.org/t/p/',
           posterSize: 'w342',
+          vote: null,
       }
   },
   computed: {
     // potrei prendere detailsMovie.original_language e verificare qui l esistenza della flag...
   },
   methods: {
-    
+    setVote(card){
+        this.vote = Math.round(card.vote_average/2);
+    },
+    setFlag(card){
+        if (card.original_language === 'en') {
+            this.lang = 'gb-eng';
+        }
+        else if (card.original_language === 'zh' || card.original_language === 'hi') {
+            this.lang = 'cn';
+        }
+        else if (card.original_language === 'ja') {
+            this.lang = 'jp';
+        }
+        else this.lang = card.original_language;
+        return this.lang
+    },
   },
 }
 </script>

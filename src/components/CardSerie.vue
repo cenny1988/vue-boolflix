@@ -1,19 +1,21 @@
 <template>
   <section>
       <div class="film-card">
+            <!-- img card -->
             <img v-if="detailsSerie.poster_path !== null" :src="imageUrl + posterSize + detailsSerie.poster_path" :alt="detailsSerie.name">
             <img v-else src="../assets/img/img-not-found.png" :alt="detailsSerie.name">
+
+            <!-- titolo -->
             <h3> {{detailsSerie.name}} </h3>
+            <!-- titolo originale -->
             <h4> {{detailsSerie.original_name}} </h4>
-            <country-flag v-if="detailsSerie.original_language === 'en' " :country="'gb-eng'" size='normal'/>
-            <country-flag v-else-if="detailsSerie.original_language === 'zh' || detailsSerie.original_language === 'hi' " :country="'cn'" size='normal'/>
-            <country-flag v-else-if="detailsSerie.original_language === 'ja' " :country="'jp'" size='normal'/>
-            <country-flag v-else :country="detailsSerie.original_language" size='normal'/>
-            <!-- {{detailsSerie.original_language}} -->
+
+            <!-- set flags -->
+            <country-flag :country="setFlag(detailsSerie)" size='normal'/>
            
-            <!-- <span><strong> Voto: </strong> {{detailsSerie.vote_average}}</span> -->
+            <!-- voto con star -->
             <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
-            <font-awesome-icon icon="star" />
+            <span><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
       </div>
   </section>
 </template>
@@ -38,15 +40,27 @@ export default {
           imageUrl: 'https://image.tmdb.org/t/p/',
           posterSize: 'w342',
           vote: null,
+          lang: '',
       }
   },
   computed:{
       },
   methods: {
-      setVote(card){
-        this.vote = card.vote_average;
-        console.log(this.vote);
-        return(this.vote);
+    setVote(card){
+        this.vote = Math.round(card.vote_average/2);
+    },
+    setFlag(card){
+        if (card.original_language === 'en') {
+            this.lang = 'gb-eng';
+        }
+        else if (card.original_language === 'zh' || card.original_language === 'hi') {
+            this.lang = 'cn';
+        }
+        else if (card.original_language === 'ja') {
+            this.lang = 'jp';
+        }
+        else this.lang = card.original_language;
+        return this.lang
     },
   },
 }
