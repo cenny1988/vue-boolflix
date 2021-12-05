@@ -1,30 +1,27 @@
 <template>
-  <section>
-      <div class="film-card">
+  <section class="col p-0 m-0 film-card">
         <!-- img card -->
-        <img v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
-        <img v-else src="../assets/img/netflix-card.png" :alt="detailsMovie.name">
+        <img class="card-img-top" v-if="detailsMovie.poster_path !== null" :src="imageUrl + posterSize + detailsMovie.poster_path" :alt="detailsMovie.name">
+        <img class="card-img-top" v-else src="../assets/img/netflix-card.png" :alt="detailsMovie.name">
 
-        <div class="detail-card">
+        <div class="detail-card card-body bg-dark text-white text-center ">
           <!-- titolo -->
-          <h3>Titolo: {{detailsMovie.title}} </h3>
+          <h3 class="card-title">{{detailsMovie.title}} </h3>
           <!-- titolo originale -->
-          <h4>Titolo Originale: {{detailsMovie.original_title}} </h4>
+          <h4>{{detailsMovie.original_title}} </h4>
 
-          <div class="vote">
+          <div>
             <span><country-flag :country="setFlag(detailsMovie)" size='normal'/></span>
             <!-- voto con star -->
             <span><strong> Voto: </strong> {{setVote(detailsMovie)}}</span>
             <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
           </div>
 
-          <div class="credits">
-            <div @click="getCast(detailsMovie.id)"><span>Cast:</span> ...show more </div>
-            <h4 v-for="cast,i in castResults" :key="i">{{cast.name}}</h4>
+          <a @click="getCast(detailsMovie.id)" class="btn btn-primary ">SHOW CAST</a>
+          <div class="card-text">
+            <div v-for="cast,i in castResults" :key="i">{{cast.name}}</div>
           </div>
         </div>
-
-      </div>
   </section>
 </template>
 
@@ -100,12 +97,6 @@ export default {
 <style scoped lang="scss">
 .star{
   color: gold;
-}
-.credits{
-  span{
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
 }
 
 </style>

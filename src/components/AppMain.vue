@@ -1,15 +1,17 @@
 <template>
   <main>
-    
-    <div v-if="loadOff">Nessun Films ancora caricato...</div>
-    <div v-else id="list-card">
-        <!-- <h3>Lista Film</h3> -->
-        <div class="lists">
-            <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" class="film-card"/>
-        </div>
-        <!-- <h3>Lista Serie</h3> -->
-        <div class="lists">
-            <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="film-card"/>
+    <!-- Differentemente dall Header per il Main e le card utilizzato Bootstrap Vanilla -->
+    <div class="container-lg" v-if="loadOff">Nessun Films ancora caricato...</div>
+    <div class="" v-else id="list-card">
+        <div class="container-fluid">
+            <!-- <h3>Lista Film</h3> -->
+            <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-2">
+                <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" />
+            </div>
+            <!-- <h3>Lista Serie</h3> -->
+            <div class="row row-cols-lg-6 ">
+                <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="col p-0 film-card"/>
+            </div>
         </div>
     </div>
 
@@ -45,64 +47,43 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 main{
+    section{
+        padding: 0;
+    }
     min-height: calc(100vh - 100px);
     background-color: #434343;
     
 
-    .lists{
-        display: flex;
-        flex-wrap: wrap;
         
 
-        .film-card{
-            flex-basis: calc(100% / 5 - 2px);
-            margin: 0 1px .5rem;
-            cursor: pointer;
-            position: relative;
-            height: 570px;
+    .film-card{
+        cursor: pointer;
+        position: relative;
             
 
-            &:hover{
-                .detail-card{
-                    display: block;
-                }
-            }
-
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                // border-radius: 20px;
-            
-            }
-
+        &:hover{
             .detail-card{
-                display: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #434343;
-                padding: 2rem .4rem;
-
-                h3, h4, div{
-                    margin-bottom: .7rem;
-                }
-                h3{
-                    font-size: 2rem;
-                }
-                .vote{
-                    text-align: center;
-                }
-                div{
-                    span{
-                        margin-right: 10px;
-                    }
-                }
-                
+                display: block;
             }
+        }
 
+        .card-img, .card-img-top {
+            border-top-left-radius: none;
+            border-top-right-radius: none;
+            
+            min-height: 600px;
+            object-fit: fill;
+                
+        }
+
+        .detail-card{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding-top: 4rem;
         }
     }
 }

@@ -1,30 +1,28 @@
 <template>
-  <section>
-      <div class="film-card">
+      <section class="col p-0 m-0 film-card">
             <!-- img card -->
-            <img v-if="detailsSerie.poster_path !== null" :src="imageUrl + posterSize + detailsSerie.poster_path" :alt="detailsSerie.name">
-            <img v-else src="../assets/img/netflix-card.png" :alt="detailsSerie.name">
+            <img class="card-img-top" v-if="detailsSerie.poster_path !== null" :src="imageUrl + posterSize + detailsSerie.poster_path" :alt="detailsSerie.name">
+            <img class="card-img-top" v-else src="../assets/img/netflix-card.png" :alt="detailsSerie.name">
 
-            <div class="detail-card">
+            <div class="detail-card card-body bg-dark text-white text-center ">
                 <!-- titolo -->
                 <h3> {{detailsSerie.name}} </h3>
                 <!-- titolo originale -->
                 <h4> {{detailsSerie.original_name}} </h4>
 
-                <div class="vote">
+                <div>
                     <span><country-flag :country="setFlag(detailsSerie)" size='normal'/></span>
                     <!-- voto con star -->
                     <span><strong> Voto: </strong> {{setVote(detailsSerie)}}</span>
                     <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
                 </div>
 
-                <div class="credits">
-                    <div @click="getCast(detailsSerie.id)"><span >Cast: ...show more </span></div>
-                    <h4 v-for="cast,i in castResults" :key="i">{{cast.name}}</h4>
+                <a @click="getCast(detailsSerie.id)" class="btn btn-primary ">SHOW CAST</a>
+                <div class="card-text">
+                    <div v-for="cast,i in castResults" :key="i">{{cast.name}}</div>
                 </div>
             </div>
-      </div>
-  </section>
+      </section>
 </template>
 
 <script>
@@ -101,10 +99,5 @@ export default {
 .star{
   color: gold;
 }   
-.credits{
-  span{
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-} 
+
 </style>
