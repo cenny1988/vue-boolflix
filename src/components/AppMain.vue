@@ -5,11 +5,11 @@
     <div class="" v-else id="list-card">
         <div class="container-fluid">
             <!-- <h3>Lista Film</h3> -->
-            <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-2">
+            <div class="row row-cols-1 row-cols-sm-2  row-cols-md-4 row-cols-lg-6">
                 <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" />
             </div>
             <!-- <h3>Lista Serie</h3> -->
-            <div class="row row-cols-lg-6 ">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
                 <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="col p-0 film-card"/>
             </div>
         </div>
