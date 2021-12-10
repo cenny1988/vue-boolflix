@@ -23,11 +23,6 @@
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>
-    <!-- <div>
-        <input type="text" :class="[active? 'active': '']" @keyup.enter="getSearch" v-model="inputText" id="search" placeholder="Start here your search">
-        <font-awesome-icon @focus="startSearch" @click="getSearch" icon="search" />
-    </div> -->
-
   </header>
 </template>
 
@@ -103,42 +98,5 @@ export default {
 .navbar-collapse {
      flex-grow: 0;
 }
-// header{
-//     height: 100px;
-//     color: #fff;
-//     background-color: #000;
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding: 0 2rem;
-
-//     div:first-child{
-//         color: #e50914;
-//         font-size: 2rem;
-//         font-weight: 900;
-//         letter-spacing: .1rem;
-//     }
-
-//     div:nth-child(2){
-//         display: flex;
-//         align-items: center;
-
-//         #search{
-//             display: none;
-//             padding: 6px;
-//             border-radius: 10px;
-//             margin-right: 10px;
-//         }
-//         #search.active{
-//             display: block;
-//         }
-//     }
-
-//     div:nth-child(2):hover{
-//         input{
-//             display: block;
-//         }
-//     }
-// }
 
 </style>
