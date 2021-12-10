@@ -53,6 +53,7 @@ main{
     .film-card{
         cursor: pointer;
         position: relative;
+        overflow: auto;
             
 
         &:hover{
@@ -77,7 +78,7 @@ main{
             left: 0;
             right: 0;
             bottom: 0;
-            padding-top: 4rem;
+            padding-top: 1rem;
         }
     }
 }

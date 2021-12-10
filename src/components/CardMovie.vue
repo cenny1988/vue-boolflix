@@ -17,6 +17,11 @@
             <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
           </div>
 
+          <!-- overview -->
+          <div v-show="!active">
+            Overview: {{detailsMovie.overview}}
+          </div>
+          
           <a @click="getCast(detailsMovie.id)" class="btn btn-primary ">SHOW MORE</a>
           <div class="card-text">
             <div v-show="active">
