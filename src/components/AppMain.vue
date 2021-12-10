@@ -2,15 +2,11 @@
   <main>
     <!-- Differentemente dall Header per il Main e le card utilizzato Bootstrap Vanilla -->
     <div class="container-lg" v-if="loadOff">Nessun Films ancora caricato...</div>
-    <div class="" v-else id="list-card">
+    <div class="" v-else id="list-card" >
         <div class="container-fluid">
-            <!-- <h3>Lista Film</h3> -->
             <div class="row row-cols-1 row-cols-sm-2  row-cols-md-4 row-cols-lg-6">
-                <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" />
-            </div>
-            <!-- <h3>Lista Serie</h3> -->
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
-                <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" class="col p-0 film-card"/>
+                <CardMovie v-for="movie in moviesList" :key="movie.id" :detailsMovie="movie" :genLists="genresList"/>
+                <CardSerie v-for="serie in seriesList" :key="serie.id" :detailsSerie="serie" :genLists="genresList"/>
             </div>
         </div>
     </div>
@@ -32,14 +28,12 @@ export default {
       moviesList: Array,
       seriesList: Array,
       loadOff: Boolean,
+      genresList: Array,
   },
   data() {
       return {
-        // loading: true,
+        genres: [],
       }
-  },
-  methods: {
-      
   },
 }
 </script>
@@ -52,9 +46,9 @@ main{
     }
     min-height: calc(100vh - 100px);
     background-color: #434343;
-    
-
-        
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     .film-card{
         cursor: pointer;

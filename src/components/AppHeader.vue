@@ -5,11 +5,8 @@
             <div>
                 <b-navbar-brand tag="h1" class="mb-0" href="#">BoolFlix</b-navbar-brand>
             </div>
-
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
             <b-collapse id="nav-collapse" is-nav>
-
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
                 <b-nav-form>
@@ -22,9 +19,7 @@
                 <font-awesome-icon @focus="startSearch" @click="getSearch" icon="search" 
                     id="icon-search"
                 />
-
                 </b-nav-form>
-                
             </b-navbar-nav>
             </b-collapse>
         </b-navbar>

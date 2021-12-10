@@ -17,9 +17,19 @@
                     <span class="star"><font-awesome-icon v-for="n, index in vote" :key="index" icon="star" /></span>
                 </div>
 
-                <a @click="getCast(detailsSerie.id)" class="btn btn-primary ">SHOW CAST</a>
+                <a @click="getCast(detailsSerie.id)" class="btn btn-primary ">SHOW MORE</a>
                 <div class="card-text">
-                    <div v-for="cast,i in castResults" :key="i">{{cast.name}}</div>
+                    <div v-show="active">
+                        <h4>Cast:</h4>
+                        <div v-for="cast,i in castResults" :key="i">{{cast.name}}</div>
+                    </div>
+
+                    <!-- stampiamo i generi del film -->
+                    <div v-show="active">
+                        <h4>Genere:</h4>  
+                        {{getGenres(detailsSerie.genre_ids)}}
+                        <div v-for="genre, indexGenre in find" :key="indexGenre">{{genre}}</div>
+                    </div>
                 </div>
             </div>
       </section>
@@ -40,6 +50,7 @@ export default {
   },
   props: {
     detailsSerie: Object,
+    genLists: Array,
   },
   data() {
       return {
@@ -50,12 +61,24 @@ export default {
           apiKey: 'd1f8770b72ea44dd001003d5c3b3b323',
           apiUrl: 'https://api.themoviedb.org/3/',
           casts: [],
+          active: false,
+          genresMovie: [],
+          indexId: null,
       }
   },
   computed:{
       castResults(){
           return [...this.casts.slice(0, 5)]
-      },
+        },
+      find(){
+            let find = [];
+            this.genLists.forEach(element => {
+            if (this.indexId.includes(element.id)) {
+                find.push(element.name)
+            }
+            });
+            return find;
+        },
       },
   methods: {
       getCast(index){
@@ -72,6 +95,7 @@ export default {
           .catch((err) => {
               console.log("Errore: ", err);
           });
+          this.active = true;
           // console.log(this.casts);
     },
     setVote(card){
@@ -90,6 +114,9 @@ export default {
         else this.lang = card.original_language;
         return this.lang
     },
+    getGenres(id){
+      this.indexId = id;
+    }
   },
 }
 </script>
@@ -99,5 +126,8 @@ export default {
 .star{
   color: gold;
 }   
+h4{
+  margin-top: .5rem;
+}
 
 </style>

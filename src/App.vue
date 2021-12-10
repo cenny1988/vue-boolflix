@@ -3,9 +3,10 @@
     <AppHeader @searchUser="research"/>
     
     <AppMain
-      :moviesList="movies"
-      :seriesList="series"
+      :moviesList="moviesResults"
+      :seriesList="seriesResults"
       :loadingStop="loading"
+      :genresList="genres"
     />
   </div>
 </template>
@@ -27,9 +28,13 @@ export default {
       apiUrl: 'https://api.themoviedb.org/3/search/',
       movies: [],
       series: [],
-      all: [],
+      genres: [],
       loading: true,
+      find: false,
     }
+  },
+  created() {
+    this.getGenres();
   },
   computed: {
       moviesResults(){
@@ -40,6 +45,47 @@ export default {
       },
   },  
   methods: {
+    // chiamata axios x lista generi movie
+    getGenres(){
+          axios
+          .get('https://api.themoviedb.org/3/genre/movie/list',{
+              params: {
+                  api_key: this.apiKey,
+                  language: 'it'
+              }
+          })
+          .then((res) => {
+            this.genres = res.data.genres;
+          })
+          .catch((err) => {
+              console.log("Errore: ", err);
+          });
+    // ciamata axios x lista generi serie tv
+          axios
+          .get('https://api.themoviedb.org/3/genre/tv/list',{
+              params: {
+                  api_key: this.apiKey,
+                  language: 'it'
+              }
+          })
+          .then((res) => {
+            // creamo un unico array con la somma della lista generi dei 2 risultati (film+serie) 
+            // this.genres = [...this.genres, ...res.data.genres]; ---> non verifica i doppioni
+            res.data.genres.forEach(element => {
+              this.genres.forEach(el => {
+                if (element.id === el.id) {
+                  this.find = true;
+                }
+              });
+              if (this.find === false){
+                this.genres.push(element);
+              }else this.find = false;
+            });
+          })
+          .catch((err) => {
+              console.log("Errore: ", err);
+          });
+      },
     getMovies(value, type){
           axios
           .get(this.apiUrl + type,{
