@@ -139,5 +139,6 @@ export default {
 #app {
   font-family: sans-serif;
   background-color: #555;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 </style>

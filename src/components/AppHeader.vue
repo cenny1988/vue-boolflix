@@ -3,7 +3,7 @@
       <!-- Utilizzato BootstrapVue per l'header e la navbar solo per un primo approccio -->
         <b-navbar toggleable="lg" fixed type="dark" variant="dark">
             <div>
-                <b-navbar-brand tag="h1" class="mb-0" href="#">BoolFlix</b-navbar-brand>
+                <img src="https://fontmeme.com/permalink/211007/c072857f28ffed69c9266a55183f4c20.png" alt="">
             </div>
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
@@ -11,7 +11,7 @@
             <b-navbar-nav class="ml-auto">
                 <b-nav-form>
                 <b-form-input size="sm" class="mr-sm-2" placeholder="Search"
-                    :class="[active? 'active': '']" @keyup.enter="getSearch" v-model="inputText"
+                    :class="[active? 'active': '']" @keyup.enter.prevent="getSearch" v-model="inputText"
                     id="search"
                 >
                 </b-form-input>
@@ -59,6 +59,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+header{
+    .bg-dark{
+        background-color: rgb(20, 20, 20)!important;
+
+    }
+}
 .navbar-expand-lg {
     justify-content: space-between;
     padding: 0 2rem;
@@ -73,12 +79,12 @@ export default {
             margin-left: 5px;
         }
 
-        #search{
-            display: none;
-            &.active{
-                    display: block;
-                }
-        }
+        // #search{
+        //     display: none;
+        //     &.active{
+        //             display: block;
+        //         }
+        // }
 
     }
 }
